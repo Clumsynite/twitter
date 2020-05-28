@@ -18,8 +18,8 @@
         }
     }
 
-
-    $count = $crud->getTweetCount($_GET['id']);
+    $id = $_GET['id'];
+    $count = $crud->getTweetCount($id);
     if ($count['num']<1){
         include 'includes/banner.php';
     } else {
@@ -31,7 +31,10 @@
         <h5 class="card-title"><?php echo $r['authorName']; ?></h5>
         <h6 class="card-subtitle mb-2 text-muted"><?php echo $r['created']; ?></h6>
         <p class="card-text"><?php echo $r['body']; ?><br/>
-        <a href="delete_tweet.php?id=<?php echo $r['tweetID']; ?>" class="btn btn-danger" style="float:right;">Delete tweet</a></p>
+        <?php if($id == $_SESSION['username']) { ?>
+            <a href="delete_tweet.php?id=<?php echo $r['tweetID']; ?>" class="btn btn-danger" style="float:right;">Delete tweet</a>
+        <?php } ?>
+        </p>
     </div>
     </div>
 <?php } } require_once 'includes/footer.php'; ?>
