@@ -48,5 +48,33 @@
                 return false;
             }
         }
+
+        public function deleteTweet($id){
+            try {
+                    $sql = "DELETE FROM `tweets` WHERE tweetID = :id";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->bindparam(":id", $id);
+                    $stmt->execute();
+                    return true;
+            } catch (PDOExecution $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
+
+        public function getTweetCount($name) {
+            try{
+                $sql = "SELECT count(*) as num FROM `tweets` WHERE authorName = :name";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindparam(":name", $name);
+                $stmt->execute();
+                $result = $stmt->fetch();
+                return $result;
+            } catch (PDOExecution $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
+
     }
 ?>

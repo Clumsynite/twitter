@@ -78,9 +78,9 @@
             }
         }  
 
-        public function getUsers(){
+        public function getUsers($user){
             try {
-                $sql = "SELECT * from users ";
+                $sql = "SELECT * from users where username != '$user'";
                 $result = $this->db->query($sql);
                 return $result;
             } catch (PDOExecution $e) {

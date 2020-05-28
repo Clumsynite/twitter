@@ -79,6 +79,26 @@
                 return false;
             }
         }
+
+        public function unfollow($user, $follower){
+            try {
+
+                $check = $this->checkFollowState($user, $follower);
+                if (!$check) {
+                    return false;
+                } else {
+                    $sql = "DELETE FROM `following` WHERE user = :user and follower = :follower";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->bindparam(":user", $user);
+                    $stmt->bindparam(":follower", $follower);
+                    $stmt->execute();
+                    return true;
+                }
+            } catch (PDOExecution $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
     }
 
 ?>

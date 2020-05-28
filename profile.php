@@ -10,8 +10,19 @@
     if(!isset($_GET['id'])){
         header('Location: index.php');
     }  
+    if(isset($_GET['status'])){
+        if($_GET['status']=="error") {
+            include 'includes/errormessage.php';
+            sleep(3);
+            header('Location: profile.php');
+        }
+    }
 
 
+    $count = $crud->getTweetCount($_GET['id']);
+    if ($count['num']<1){
+        include 'includes/banner.php';
+    } else {
     $result = $crud->getTweetByAuthor($_GET['id']);
     while($r = $result->fetch(PDO::FETCH_ASSOC)){
 ?>
@@ -19,7 +30,8 @@
     <div class="card-body">
         <h5 class="card-title"><?php echo $r['authorName']; ?></h5>
         <h6 class="card-subtitle mb-2 text-muted"><?php echo $r['created']; ?></h6>
-        <p class="card-text"><?php echo $r['body']; ?></p>
+        <p class="card-text"><?php echo $r['body']; ?><br/>
+        <a href="delete_tweet.php?id=<?php echo $r['tweetID']; ?>" class="btn btn-danger" style="float:right;">Delete tweet</a></p>
     </div>
     </div>
-<?php } require_once 'includes/footer.php'; ?>
+<?php } } require_once 'includes/footer.php'; ?>

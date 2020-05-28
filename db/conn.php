@@ -1,11 +1,11 @@
 <?php
     // Test Connection
-/*     $host = '127.0.0.1';
+    /* $host = '127.0.0.1';
     $db = 'twitterlite';
     $user = 'root';
     $pass = 'clumz';
-    $charset = 'utf8mb4';
- */
+    $charset = 'utf8mb4'; */
+ 
     // Development Connection
     $host = 'remotemysql.com';
     $db = '24RU2T4oF2';

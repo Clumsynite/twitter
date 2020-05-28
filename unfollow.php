@@ -1,6 +1,6 @@
 <?php
-    $page="following.php";
-    $title="Follow user";
+    $page="unfollow.php";
+    $title="Unfollow user";
     require_once 'db/conn.php';
     require_once 'includes/header.php';
 
@@ -11,7 +11,7 @@
         header('Location: index.php');
     } 
     
-    $result = $follow->startFollowing($_GET['id'], $_SESSION['username']);
+    $result = $follow->unfollow($_GET['id'], $_SESSION['username']);
 
     if($result){
         header ("Location: userlist.php");
