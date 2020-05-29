@@ -31,8 +31,8 @@
     </div>
 </form>
 <?php
-    if(!$follower_count['num']>0){
-        exit;
+    if($follower_count['num']<=0){
+        include 'includes/startFollowing.php';
     } else {
         $result = $follow->getFollowingTweets($_SESSION['username']);
         while($r = $result->fetch(PDO::FETCH_ASSOC)){
