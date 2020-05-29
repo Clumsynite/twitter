@@ -16,7 +16,7 @@
         }
     }
     
-    $follower_count = $follow->getFollowerCount($_SESSION['username']);
+    $follower_count = $follow->getFollowingCount($_SESSION['username']);
     
 ?>
 <form action="create_tweet.php" method="post">

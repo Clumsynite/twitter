@@ -51,7 +51,7 @@
 
         }
 
-        public function getFollowerCount($username){
+        public function getFollowingCount($username){
             try{
                 $sql = "SELECT count(*) as num FROM tweets t join following f on f.user = authorName where follower = :username";
                 $stmt = $this->db->prepare($sql);
@@ -99,6 +99,48 @@
                 return false;
             }
         }
+
+        public function getFollowers($user){
+            try {
+                $sql = "SELECT * from following where user = '$user'";
+                $result = $this->db->query($sql);
+                return $result;
+            } catch (PDOExecution $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
+
+        public function checkFollowerState($user, $follower){
+            try{
+                $sql = "SELECT * FROM following WHERE follower = :user AND user = :follower";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindparam(":user", $user);
+                $stmt->bindparam(":follower", $follower);
+                $stmt->execute();
+                $result = $stmt->fetch();
+                return $result;
+            } catch (PDOExecution $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
+
+        public function getFollowerCount($username){
+            try{
+                $sql = "SELECT count(*) as num FROM tweets t join following f on f.user = authorName where user = :username";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindparam(":username", $username);
+                $stmt->execute();
+                $result = $stmt->fetch();
+                return $result;
+            } catch (PDOExecution $e) {
+                echo $e->getMessage();
+                return false;
+            }
+        }
+
+        
     }
 
 ?>

@@ -34,7 +34,10 @@
             if(!isset($_SESSION['userId'])){ 
           ?>
           <a class="nav-item nav-link  <?php if($page=='index.php'){echo 'active';} ?>" href="index.php">Login <span class="sr-only">(current)</span></a>
-          <?php } else { ?>
+          <?php } else { 
+            $follower_count = $follow->getFollowingCount($_SESSION['username']);
+            if($follower_count['num']>0){?>
+          <a class="nav-item nav-link <?php if($page=='followers.php'){echo 'active';} ?>" href="followers.php"> Following me <span class="sr-only">(current)</span></a><?php } ?>
           <a class="nav-item nav-link" href="logout.php"> Logout <span class="sr-only">(current)</span></a>
           <?php } ?>
         </div>
