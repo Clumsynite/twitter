@@ -20,7 +20,7 @@
 
     $id = $_GET['id'];
     $count = $crud->getTweetCount($id);
-    if ($id == $_SESSION['username']){
+    if ($id == $_SESSION['username'] && $count['num']<1 ){
         include 'includes/startPosting.php';
     }else if ($count['num']<1){
         include 'includes/banner.php';
