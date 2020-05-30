@@ -7,17 +7,18 @@
             $this->db = $conn;
         }
 
-        public function createTweet($id, $name, $body){
+        public function createTweet($id, $name, $body, $date){
             try {
                 
                 // define sql statement to be executed
-                $sql = "INSERT INTO tweets (authorId, authorName, body) VALUES (:id, :name, :body)";
+                $sql = "INSERT INTO tweets (authorId, authorName, body, created) VALUES (:id, :name, :body, :date)";
                 // prepare the sql statement for execution
                 $stmt = $this->db->prepare($sql);
                 // bind all placeholders to the actual values
                 $stmt->bindparam(":id", $id);
                 $stmt->bindparam(":name", $name);
                 $stmt->bindparam(":body", $body);
+                $stmt->bindparam(":date", $date);
                 // execute statement
                 $stmt->execute();
                 return true;
