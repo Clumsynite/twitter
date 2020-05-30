@@ -39,7 +39,7 @@
 ?>
     <div class="card border-primary mb-3">
     <div class="card-body">
-        <h5 class="card-title"><?php echo $r['authorName']; ?></h5>
+        <h5 class="card-title"><a class="text-info" href="profile.php?id=<?php echo $r['authorName']; ?>"><?php echo $r['authorName']; ?></a></h5>
         <h6 class="card-subtitle mb-2 text-muted"><?php echo $r['created']; ?></h6>
         <p class="card-text"><?php echo $r['body']; ?></p>
     </div>
