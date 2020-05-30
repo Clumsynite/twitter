@@ -1,17 +1,17 @@
 <?php
-    $page="followers.php";
-    $title="My Followers";
+    $page="iFollow.php";
+    $title="People I Follow";
     require_once 'db/conn.php';
     require_once 'includes/header.php';
     
     if(!isset($_SESSION['userId']) && !isset($_SESSION['username'])){
         header('Location: index.php');
     }
-    $follower_count = $follow->getFollowerCount($_SESSION['username']);
-    if($follower_count['num']==0){
+    $following_count = $follow->getFollowingCount($_SESSION['username']);
+    if($following_count['num']==0){
         header('Location: home.php');
     }
-    $result = $follow->getFollowers($_SESSION['username']);
+    $result = $follow->getFollowing($_SESSION['username']);
     
 ?>
 
@@ -27,16 +27,16 @@
             <tbody>
                 <?php while($r = $result->fetch()){ ?>
                     <tr>
-                        <td><?php echo $r['follower']; ?></td>
+                        <td><?php echo $r['user']; ?></td>
                         <td >
-                            <a href="profile.php?id=<?php echo $r['follower']; ?>" class="btn btn-primary">Visit Profile</a>
+                            <a href="profile.php?id=<?php echo $r['user']; ?>" class="btn btn-primary">Visit Profile</a>
                             <?php
-                                $followState = $follow->checkFollowerState($_SESSION['username'],$r['follower']); 
+                                $followState = $follow->checkFollowState($r['user'],$_SESSION['username']); 
                                 if (!$followState){
                             ?>
-                                <a href="following.php?id=<?php echo $r['follower']; ?>&page=flrs" class="btn btn-success">Follow</a>
+                                <a href="following.php?id=<?php echo $r['user']; ?>&page=flwing" class="btn btn-success">Follow</a>
                             <?php } else { ?>
-                                <a href="unfollow.php?id=<?php echo $r['follower']; ?>&page=flrs" class="btn btn-danger">Unfollow</a>
+                                <a href="unfollow.php?id=<?php echo $r['user']; ?>&page=flwing" class="btn btn-danger">Unfollow</a>
                             <?php }?>
                         </td>
                     </tr>

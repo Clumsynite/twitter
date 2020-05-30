@@ -35,9 +35,12 @@
           ?>
           <a class="nav-item nav-link  <?php if($page=='index.php'){echo 'active';} ?>" href="index.php">Login <span class="sr-only">(current)</span></a>
           <?php } else { 
-            $follower_count = $follow->getFollowingCount($_SESSION['username']);
-            if($follower_count['num']>0){?>
-          <a class="nav-item nav-link <?php if($page=='followers.php'){echo 'active';} ?>" href="followers.php"> Following me <span class="sr-only">(current)</span></a><?php } ?>
+            $follower_count = $follow->getFollowerCount($_SESSION['username']);
+            $following_count = $follow->getFollowingCount($_SESSION['username']);
+            if($following_count['num']>0){?>
+          <a class="nav-item nav-link <?php if($page=='iFollow.php'){echo 'active';} ?>" href="iFollow.php"> People I Follow <span class="badge badge-light"><?php echo $following_count['num']; ?></span> <span class="sr-only">(current)</span></a><?php } if ($follower_count['num']>0){ ?>
+            <a class="nav-item nav-link <?php if($page=='followers.php'){echo 'active';} ?>" href="followers.php"> My Followers <span class="badge badge-light"><?php echo $follower_count['num']; ?></span> <span class="sr-only">(current)</span></a>
+          <?php } ?>
           <a class="nav-item nav-link" href="logout.php"> Logout <span class="sr-only">(current)</span></a>
           <?php } ?>
         </div>

@@ -53,7 +53,7 @@
 
         public function getFollowingCount($username){
             try{
-                $sql = "SELECT count(*) as num FROM tweets t join following f on f.user = authorName where follower = :username";
+                $sql = "SELECT count(*) as num FROM following where follower = :username";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(":username", $username);
                 $stmt->execute();
@@ -128,7 +128,7 @@
 
         public function getFollowerCount($username){
             try{
-                $sql = "SELECT count(*) as num FROM tweets t join following f on f.user = authorName where user = :username";
+                $sql = "SELECT count(follower) as num FROM following where user = :username";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(":username", $username);
                 $stmt->execute();
